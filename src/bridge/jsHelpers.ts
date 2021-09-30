@@ -31,6 +31,7 @@ import type {
   ScanAccountEvent,
   SyncConfig,
   CryptoCurrency,
+  NFT,
 } from "../types";
 import type { CurrencyBridge, AccountBridge } from "../types/bridge";
 import getAddress from "../hw/getAddress";
@@ -105,6 +106,15 @@ Operation[] {
 
   return all;
 }
+export const mergeNfts = (
+  oldNfts: NFT[] | undefined,
+  newNfts: NFT[] | undefined
+): NFT[] => {
+  const nfts = (oldNfts || []).concat(newNfts || []);
+  const nftsSet = new Set(nfts);
+
+  return Array.from(nftsSet);
+};
 export const makeSync =
   (
     getAccountShape: GetAccountShape,
